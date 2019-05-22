@@ -133,7 +133,10 @@ class KNearestNeighbor(object):
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        dists[:, :] = np.sqrt(np.sum(np.square(X[:, :] - self.X_train[:, :]), axis=2))
+        t = np.multiply(np.dot(X, self.X_train.T), -2) #计算 -2Xn11Xn'11
+        t = np.add(t, np.sum(np.square(X), axis=1, keepdims=True)) #计算 Xn11^2 通过广播相加
+        t = np.add(t, np.sum(np.square(self.X_train), axis=1)) #计算 Xn'11^2 通过广播相加
+        dists = np.sqrt(t)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
