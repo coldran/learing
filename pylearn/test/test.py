@@ -20,4 +20,6 @@ class Chain(object):
 
     __repr__ = __str__
 
-Chain().status.user.timeline.list
+print(Chain().status.user.timeline.list._path)
+
+
